@@ -9,5 +9,6 @@ namespace sqlupdate.Models
     {
         public Donor donor { get; set; }
         public Donation donation { get; set; }
+        public Expenditure expenditure { get; set; }
     }
 }

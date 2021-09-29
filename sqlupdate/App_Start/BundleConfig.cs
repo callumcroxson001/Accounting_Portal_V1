@@ -23,7 +23,7 @@ namespace sqlupdate
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-c.css",
                       "~/Content/site.css"));
         }
     }

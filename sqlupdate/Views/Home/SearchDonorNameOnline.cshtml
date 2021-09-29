@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "SearchDonorNameOnline";
+}
+
+<h2>SearchDonorNameOnline</h2>
+
+<form method="post" action="~/Home/Online">
+    <div class="col-md-12 eDonorDetails">
+        <label class="control-label col-md-3">Name:</label>
+        <input type="text" class="control-label col-md-3 form-control" name="name" readonly value="@foreach (var i in Model) { @i.name}">
+
+        <label class="control-label col-md-3">Donor ID/No:</label>
+        <input type="text" class="control-label col-md-3 form-control" name="DID" readonly value="@foreach (var i in Model) { @i.ID}">
+    </div>
+    <div class="col-md-12 purpose">
+        <label class="col-md-4">Envelope Purpose</label>
+        <label class="col-md-4">Specifics/Notes</label>
+        <label class="col-md-4">Amount</label>
+    </div>
+    <div class="col-md-12">
+        <select class="col-md-4 form-control" name="purpose" id="ePurpose">
+            <option value="bank">bank</option>
+            <option value="misson">mission</option>
+        </select>
+
+        <input class="col-md-4" type="text" name="specifics">
+        <input class="col-md-4" type="text" name="amount">
+        <input type="date" id="donationDate" name="date" value="03/09/2021" min="01/01/2021" max="30/12/2021">
+    </div>
+    <input type="submit" value="Add" class="btn btn-default" />
+</form>

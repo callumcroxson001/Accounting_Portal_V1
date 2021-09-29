@@ -13,10 +13,10 @@ namespace sqlupdate.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class testEntities2 : DbContext
+    public partial class testEntities3 : DbContext
     {
-        public testEntities2()
-            : base("name=testEntities2")
+        public testEntities3()
+            : base("name=testEntities3")
         {
         }
     
@@ -25,8 +25,11 @@ namespace sqlupdate.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Donation> Donations { get; set; }
         public virtual DbSet<Donor> Donors { get; set; }
+        public virtual DbSet<Expenditure> Expenditures { get; set; }
         public virtual DbSet<Purpos> Purposes { get; set; }
+        public virtual DbSet<SubCategory> SubCategories { get; set; }
     }
 }
