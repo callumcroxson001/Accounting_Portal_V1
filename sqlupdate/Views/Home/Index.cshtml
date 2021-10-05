@@ -15,22 +15,18 @@
             <button type="button">Add new expense</button>
         </div>
         <hr>
-        <h3>Query</h3>
-        <p>Select table to query</p>
-        <select name="query" id="query">
-            <option value="donor">Donors</option>
-            <option value="donations">Donations</option>
-            <option value="expenditures">Expenditure</option>
-        </select>
-        <p>Select start date</p>
-        <input type="date" id="start" name="start" value="03/09/2021" min="01/01/2021" max="30/12/2021">
-        <p>Select finish date</p>
-        <input type="date" id="end" name="end" value="04/09/2021" min="01/01/2021" max="30/12/2021">
-        <hr>
         <h3>Report</h3>
-        <button type="button">Report 1</button>
-        <button type="button">Report 1</button>
-        <button type="button">Report 1</button>
+        <div class="formButtons">
+            <button type="button">Monthly Report</button>
+            <button type="button">Yearly Report</button>
+            <button type="button">Tax Certificate</button>
+            <button type="button">Monthly Expenses</button>
+            <button type="button">Yearly Expenses</button>
+            <button type="button">Purpose Totals</button>
+            <button type="button">List of donors</button>
+            <button type="button">List table values</button>
+        </div>
+        
     </div>
     <div class="col-md-10 main">
         <div class="content">
@@ -80,8 +76,6 @@
                         <button type="button">Envelope</button>
                         <button type="button">Online</button>
                     </div>
-                    <hr>
-                    
                 </div>
                 <div class="col-md-9 main">
                     <div class="formContent">
@@ -91,21 +85,26 @@
                                 <div class="col-md-12 cashAmount">
                                     @Html.LabelFor(model => model.donation.amount, htmlAttributes: new { @class = "control-label col-md-2" })
                                     @Html.ValidationMessageFor(model => model.donation.amount, "", new { @class = "text-danger" })
-                                    <input type="text" name="amount">
-                                    <input type="date" id="donationDate" name="date" value="03/09/2021" min="01/01/2021" max="30/12/2021">
+                                    <input class="form-control" type="text" name="amount">
+                                </div>
+                                <div class="col-md-12 cashAmount">
+                                    @Html.LabelFor(model => model.donation.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <input class="form-control" type="date" id="donationDate" name="date" min="01/01/2021" max="30/12/2021">
                                 </div>
                                 <input type="submit" value="Add" class="btn btn-default" />
                             </form>
                         </div>
                         <div class="formContent_inside col-md-12">
-                            <h3>New Envelope</h3>
+                            <h3>New Envelope Donation</h3>
+                            <h4>Please enter in the donor's ID or name first</h4>
                             <form method="post" action="~/Home/SearchDonorName">
                                 <div class="col-md-12 findByID">
                                     <label class="control-label col-md-2">Donor ID/No:</label>
                                     @Html.EditorFor(model => model.donor.ID, new { htmlAttributes = new { @class = "form-control" } })
-                                    <input type="submit" value="Search" class="btn btn-default" />
                                 </div>
+                                <input type="submit" value="Search" class="btn btn-default" />
                             </form>
+                            <hr />
                             <form method="post" action="~/Home/SearchDonorName">
                                 <div class="col-md-12 findByName">
                                     <label class="control-label col-md-2">Donor Name:</label>
@@ -115,7 +114,8 @@
                             </form>
                         </div>
                         <div class="formContent_inside col-md-12">
-                            <h3>New Online Income</h3>
+                            <h3>New Online Income Donation</h3>
+                            <h4>Please enter in the donor's ID or name first</h4>
                             <form method="post" action="~/Home/SearchDonorNameOnline">
                                 <div class="col-md-12 findByID">
                                     <label class="control-label col-md-2">Donor ID/No:</label>
@@ -123,6 +123,7 @@
                                 </div>
                                 <input type="submit" value="Search" class="btn btn-default" />
                             </form>
+                            <hr />
                             <form method="post" action="~/Home/SearchDonorNameOnline">
                                 <div class="col-md-12 findByName">
                                     <label class="control-label col-md-2">Donor Name:</label>
@@ -141,7 +142,7 @@
                         <input class="form-control" type="date" id="start" name="date" value="03/09/2021" min="01/01/2021" max="30/12/2021">
                     </div>
                     <div class="col-md-12">
-                        <div class="col-md-6 category">
+                        <div class="col-md-12 category">
                             <label class="control-label col-md-2">Category</label>
                             <select class="form-control" name="category" id="category" onchange="configureDropDownLists(this,document.getElementById('subcategory'))">
                                 <option value="Bank">Funds</option>
@@ -149,37 +150,170 @@
                                 <option value="Names">Names</option>
                             </select>
                         </div>
-                        <div class="col-md-6 categorycode">
-                            <label class="control-label col-md-3">Category Code</label>
-                            <label class="control-label col-md-3">auto</label>
-                        </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="col-md-6 category">
+                        <div class="col-md-12 category">
                             <label class="control-label col-md-2">Sub-Category</label>
                             <select class="form-control" name="subcategory" id="subcategory">
                                 <option value="Food">Food</option>
                                 <option value="Option">optio</option>
                             </select>
                         </div>
-                        <div class="col-md-6 subcategorycode">
-                            <label class="control-label col-md-3">Sub-Category Code</label>
-                            <label class="control-label col-md-3">auto</label>
-                        </div>
                     </div>
                     <div class="col-md-12 amount">
                         @Html.LabelFor(model => model.expenditure.amount, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <input class="col-md-4" type="text" name="amount">
+                        <input class="col-md-4 form-control" type="text" name="amount">
                     </div>
                     <div class="col-md-12 reference">
                         @Html.LabelFor(model => model.expenditure.invoiceReference, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <input class="col-md-4" type="text" name="invoiceRef">
+                        <input class="col-md-4 form-control" type="text" name="invoiceRef">
                     </div>
                     <div class="col-md-12 notes">
                         @Html.LabelFor(model => model.expenditure.notes, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <input class="col-md-4" type="text" name="notes">
+                        <input class="col-md-4 form-control" type="text" name="notes">
                     </div>
                     <input type="submit" value="Add" class="btn btn-default" />
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Monthly Donations Report</h2>
+                <h3>Please select the month and year you want to see the income for.</h3>
+                <form method="post" action="~/Home/Monthly">
+                    <div class="col-md-12 findByID">
+                        <select class="form-control" name="month" id="month">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 findByID">
+                        <label class="col-md-1">Year </label>
+                        <input class="form-control" type="text" name="year">
+                    </div>
+                    <input type="submit" value="Generate Report" class="btn btn-default" />
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Yearly Donations Report</h2>
+                <h3>Please select the year you want to see the income for.</h3>
+                <form method="post" action="~/Home/Yearly">
+                    <div class="col-md-12 findByID">
+                        <label class="col-md-1">Year </label>
+                        <input class="form-control" type="text" name="year">
+                    </div>
+                    <input type="submit" value="Generate Report" class="btn btn-default" />
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Donor Tax Certificate</h2>
+                <h3>Please enter in the donor's ID or name and the year of donations you want to get</h3>
+                <form method="post" action="~/Home/TaxCertificate">
+                    <div class="col-md-12 findByID">
+                        <label class="control-label col-md-2">Donor ID/No:</label>
+                        @Html.EditorFor(model => model.donor.ID, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-12 findByName">
+                        <label class="col-md-2">Year </label>
+                        <input class="form-control" type="text" name="year" />
+                    </div>
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </form>
+                <hr />
+                <form method="post" action="~/Home/TaxCertificate">
+                    <div class="col-md-12 findByName">
+                        <label class="control-label col-md-2">Donor Name:</label>
+                        @Html.EditorFor(model => model.donor.name, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="col-md-12 findByName">
+                        <label class="col-md-2">Year </label>
+                        <input class="form-control" type="text" name="year" />
+                    </div>
+                    <input type="submit" value="Search" class="btn btn-default" />
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Monthly Expenses Report</h2>
+                <h3>Please select the month you want to see the total expenses for.</h3>
+                <form method="post" action="~/Home/ExMonthly">
+                    <div class="col-md-12 findByID">
+                        <select class="form-control" name="month" id="month">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 findByID">
+                        <label class="col-md-1">Year </label>
+                        <input class="form-control" type="text" name="year">
+                    </div>
+                    <input type="submit" value="Generate Report" class="btn btn-default" />
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Yearly Expenses Report</h2>
+                <h3>Please select the year you want to see the income for.</h3>
+                <form method="post" action="~/Home/ExYearly">
+                    <div class="col-md-12 findByID">
+                        <label class="col-md-1">Year </label>
+                        <input class="form-control" type="text" name="year">
+                    </div>
+                    <input type="submit" value="Generate Report" class="btn btn-default" />
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Purpose Totals</h2>
+                <h3>Please select a purpose to view the total amount for.</h3>
+                <form method="post" action="~/Home/PurposeTotal">
+                    <div class="col-md-12 findByID">
+                        <select class="col-md-12 form-control" name="purpose">
+                            <option value="bank">bank</option>
+                            <option value="misson">mission</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Generate total" class="btn btn-default" />
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Donor report</h2>
+                <h3>Please click the button below to generate the list of current donors</h3>
+                <form action="~/Home/DonorList">
+                    <div class="col-md-12 findByID">
+                        <input type="submit" value="Generate" class="btn btn-default" />
+                    </div>
+                </form>
+            </div>
+            <div class="content_inside col-md-12">
+                <h2>Lists</h2>
+                <h3>This report will generate all the purposes, categories or subcategories depending on the option selected.</h3>
+                <h4>Purposes are all the purposes available for envelopes and online transactions</h4>
+                <h4>Category and sub-category are all the categories expenses fall under</h4>
+                <form action="~/Home/ViewList">
+                    <div class="col-md-12 findByID">
+                        <select class="form-control" name="viewList" id="list">
+                            <option value="Purposes">Purposes</option>
+                            <option value="Category">Categories</option>
+                            <option value="SubCategory">Sub-categories</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Generate" class="btn btn-default" />
                 </form>
             </div>
         </div>
@@ -331,7 +465,6 @@
 
     #donationDate {
         width: 70%;
-        margin-bottom: 15px;
     }
 
     #ePurpose {
